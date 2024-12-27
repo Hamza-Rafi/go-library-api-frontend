@@ -28,6 +28,24 @@ async function postBook(title, author) {
     return newBook
 }
 
+async function putBook(id, title, author) {
+    var url = apiBase + '/books'
+
+    body = {
+        id: id,
+        title: title,
+        author: author
+    }
+
+    const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(body)
+    })
+
+    const retMsg = await response.json()
+    return retMsg
+}
+
 function addRow(book, rowNumber) {
     var row = booksTable.insertRow(rowNumber)
 

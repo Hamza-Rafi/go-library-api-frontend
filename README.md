@@ -6,3 +6,9 @@
 - run `pnpm i` to install packages
 - run `pnpm run dev` to start the dev server
 - visit `http://localhost:5173/`
+
+## Vue implementation
+- coming
+
+## React implementation
+- coming

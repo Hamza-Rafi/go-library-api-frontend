@@ -8,7 +8,10 @@
 - visit `http://localhost:5173/`
 
 ## Vue implementation
-- coming
+- `cd` into `vue` directory
+- run `pnpm i`
+- run `pnpm run dev`
+- visit `http://localhost:5173/`
 
 ## React implementation
 - coming

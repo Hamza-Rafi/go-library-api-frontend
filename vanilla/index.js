@@ -43,7 +43,10 @@ async function putBook(id, title, author) {
     })
 
     const retMsg = await response.json()
-    return retMsg
+
+    alert(retMsg.message)
+
+    return response.status, retMsg
 }
 
 function addRow(book, rowNumber) {
@@ -52,7 +55,16 @@ function addRow(book, rowNumber) {
     row.insertCell(0).innerText = book.id
     row.insertCell(1).innerText = book.title
     row.insertCell(2).innerText = book.author
+
+    // edit button
+    var editButton = document.createElement('button')
+    editButton.innerText = 'Edit'
+    editButton.dataset.id = book.id
+    editButton.addEventListener('click', () => { editBook(editButton.dataset.id) })
+
+    row.insertCell(3).appendChild(editButton)
 }
+
 async function populateTable() {
     var books = await getBooks()
 
@@ -83,6 +95,53 @@ async function addBook() {
     // clear inputs
     titleInput.value = ''
     authorInput.value = ''
+}
+
+async function editBook(id) {
+    console.log("edit book")
+    console.log(typeof id)
+    //
+    // replace row text with input boxes
+    var row = booksTable.rows[Number(id) + 1]
+
+    // replace title cell text with input
+    var titleCell = row.cells[1]
+    var titleInput = document.createElement('input')
+    titleInput.value = titleCell.innerText
+
+    titleCell.innerText = ''
+    titleCell.appendChild(titleInput)
+
+    // replace author cell text with input
+    var authorCell = row.cells[2]
+    var authorInput = document.createElement('input')
+    authorInput.value = authorCell.innerText
+
+    authorCell.innerText = ''
+    authorCell.appendChild(authorInput)
+
+    // replace edit button with submit button
+    var editButtonCell = row.cells[3]
+    var editButton = editButtonCell.children[0]
+    editButtonCell.removeChild(editButton)
+
+    var submitButton = document.createElement('button')
+    submitButton.innerText = 'Submit'
+    submitButton.addEventListener('click', () => {
+        putBook(id, titleInput.value, authorInput.value)
+
+        editButtonCell.removeChild(submitButton)
+        editButtonCell.appendChild(editButton)
+
+        titleCell.removeChild(titleInput)
+        titleCell.innerText = titleInput.value
+
+        authorCell.removeChild(authorInput)
+        authorCell.innerText = authorInput.value
+    })
+
+    editButtonCell.appendChild(submitButton)
+    console.log(editButton)
 }
 
 populateTable()

@@ -44,7 +44,21 @@ async function putBook(id, title, author) {
 
     const retMsg = await response.json()
 
-    alert(retMsg.message)
+    //alert(retMsg.message)
+
+    return response.status, retMsg
+}
+
+async function deleteBook(id) {
+    var url = apiBase + '/books' + '/' + id
+
+    const response = await fetch(url, {
+        method: "DELETE"
+    })
+
+    const retMsg = await response.json()
+
+    //alert(retMsg.message)
 
     return response.status, retMsg
 }
@@ -61,8 +75,23 @@ function addRow(book, rowNumber) {
     editButton.innerText = 'Edit'
     editButton.dataset.id = book.id
     editButton.addEventListener('click', () => { editBook(editButton.dataset.id) })
-
     row.insertCell(3).appendChild(editButton)
+
+    // delete button
+    var deleteButton = document.createElement('button')
+    deleteButton.innerText = 'Delete'
+    deleteButton.dataset.id = book.id
+    deleteButton.addEventListener('click', () => {
+        deleteBook(deleteButton.dataset.id)
+        // get the row index number
+        for (var i = 0; i < booksTable.rows.length; i++) {
+            if (booksTable.rows[i].cells[0].innerText != deleteButton.dataset.id)
+                continue
+
+            booksTable.deleteRow(i)
+        }
+    })
+    row.insertCell(4).appendChild(deleteButton)
 }
 
 async function populateTable() {

@@ -14,4 +14,7 @@
 - visit `http://localhost:5173/`
 
 ## React implementation
-- coming
+- `cd` into `react` directory
+- run `pnpm i`
+- run `pnpm run dev`
+- visit `http://localhost:5173/`

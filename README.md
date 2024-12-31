@@ -4,17 +4,17 @@
 ## Vanilla implementation
 - `cd` into the `vanilla` directory
 - run `pnpm i` to install packages
-- run `pnpm run dev` to start the dev server
+- run `pnpm dev` to start the dev server
 - visit `http://localhost:5173/`
 
 ## Vue implementation
 - `cd` into `vue` directory
 - run `pnpm i`
-- run `pnpm run dev`
+- run `pnpm dev`
 - visit `http://localhost:5173/`
 
 ## React implementation
 - `cd` into `react` directory
 - run `pnpm i`
-- run `pnpm run dev`
+- run `pnpm dev`
 - visit `http://localhost:5173/`
